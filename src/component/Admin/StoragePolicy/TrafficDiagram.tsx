@@ -125,11 +125,13 @@ export const TrafficDiagram = ({
   const [source, setSource] = useState<Source>(Source.web);
   const nodes = useMemo(() => {
     const res: Node[] = [];
+
     if (source == Source.wopi) {
       res.push(Node.wopi);
     } else {
       res.push(Node.user);
     }
+
     if (variant == "upload") {
       if (proxyed || source == Source.dav || source == Source.web_edit) {
         res.push(Node.cloudreve);
@@ -138,13 +140,17 @@ export const TrafficDiagram = ({
       if (proxyed || source == Source.wopi || source == Source.encrypted_file) {
         res.push(Node.cloudreve);
       }
-
-      if (cdn) {
-        res.push(Node.proxy);
-      }
     }
 
-    if (variant == "upload" && internalEndpoint && (source == Source.dav || source == Source.web_edit || proxyed)) {
+    if (cdn) {
+      res.push(Node.proxy);
+    }
+
+    if (
+      variant == "upload" &&
+      internalEndpoint &&
+      (source == Source.dav || source == Source.web_edit || proxyed || cdn)
+    ) {
       res.push(Node.storage_node_internal);
     } else if (
       variant == "download" &&

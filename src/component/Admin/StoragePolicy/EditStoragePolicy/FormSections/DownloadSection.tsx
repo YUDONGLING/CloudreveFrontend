@@ -8,6 +8,7 @@ import { EndpointInput } from "../../../Common/EndpointInput";
 import { NoMarginHelperText, SettingSection, SettingSectionContent } from "../../../Settings/Settings";
 import { TrafficDiagram } from "../../TrafficDiagram";
 import { StoragePolicySettingContext } from "../StoragePolicySettingWrapper";
+import PathReplacementEditor from "./PathReplacementEditor";
 
 const DownloadSection = () => {
   const { t } = useTranslation("dashboard");
@@ -58,6 +59,16 @@ const DownloadSection = () => {
       setPolicy((p: StoragePolicy) => ({
         ...p,
         settings: { ...p.settings, source_auth: e.target.checked ? true : undefined },
+      }));
+    },
+    [setPolicy],
+  );
+
+  const onPathReplacementChange = useCallback(
+    (value: Array<{ from: string; to: string }>) => {
+      setPolicy((p: StoragePolicy) => ({
+        ...p,
+        settings: { ...p.settings, path_replacements: value.length > 0 ? value : undefined },
       }));
     },
     [setPolicy],
@@ -122,6 +133,17 @@ const DownloadSection = () => {
             </Collapse>
           </FormControl>
         </SettingForm>
+        {values.settings?.custom_proxy && (
+          <SettingForm title={t("policy.downloadCdn") + t("policy.pathReplacement")} lgWidth={5}>
+            <FormControl fullWidth>
+              <PathReplacementEditor
+                value={values.settings?.path_replacements}
+                onChange={onPathReplacementChange}
+                helperText={t("policy.pathReplacementDes")}
+              />
+            </FormControl>
+          </SettingForm>
+        )}
         {values.type !== PolicyType.local && (
           <SettingForm lgWidth={5}>
             <FormControl fullWidth>

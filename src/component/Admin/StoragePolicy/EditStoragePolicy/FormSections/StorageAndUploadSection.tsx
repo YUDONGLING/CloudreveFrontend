@@ -1,4 +1,6 @@
 import {
+  Box,
+  Checkbox,
   Collapse,
   FormControl,
   FormControlLabel,
@@ -15,12 +17,14 @@ import { PolicyType } from "../../../../../api/explorer";
 import SizeInput, { StyleOutlinedSelect } from "../../../../Common/SizeInput";
 import { DenseFilledTextField } from "../../../../Common/StyledComponents";
 import SettingForm from "../../../../Pages/Setting/SettingForm";
+import { EndpointInput } from "../../../Common/EndpointInput";
 import MagicVarDialog from "../../../Common/MagicVarDialog";
 import { NoMarginHelperText, SettingSection, SettingSectionContent } from "../../../Settings/Settings";
 import { PolicyPropsMap } from "../../StoragePolicySetting";
 import { TrafficDiagram } from "../../TrafficDiagram";
 import { StoragePolicySettingContext } from "../StoragePolicySettingWrapper";
 import { fileMagicVars, pathMagicVars } from "./magicVars";
+import PathReplacementEditor from "./PathReplacementEditor";
 
 const StorageAndUploadSection = () => {
   const { t } = useTranslation("dashboard");
@@ -200,6 +204,26 @@ const StorageAndUploadSection = () => {
     [setPolicy],
   );
 
+  const onUploadCdnChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPolicy((p: StoragePolicy) => ({
+        ...p,
+        settings: { ...p.settings, upload_custom_proxy: e.target.checked ? true : undefined },
+      }));
+    },
+    [setPolicy],
+  );
+
+  const onUploadProxyServerChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPolicy((p: StoragePolicy) => ({
+        ...p,
+        settings: { ...p.settings, upload_proxy_server: e.target.value },
+      }));
+    },
+    [setPolicy],
+  );
+
   const onAcceleratedDomainUploadChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setPolicy((p: StoragePolicy) => ({
@@ -220,6 +244,16 @@ const StorageAndUploadSection = () => {
       setPolicy((p: StoragePolicy) => ({
         ...p,
         settings: { ...p.settings, chunk_concurrency: value },
+      }));
+    },
+    [setPolicy],
+  );
+
+  const onUploadPathReplacementChange = useCallback(
+    (value: Array<{ from: string; to: string }>) => {
+      setPolicy((p: StoragePolicy) => ({
+        ...p,
+        settings: { ...p.settings, upload_path_replacements: value.length > 0 ? value : undefined },
       }));
     },
     [setPolicy],
@@ -404,6 +438,49 @@ const StorageAndUploadSection = () => {
             </SettingForm>
           )}
         </Collapse>
+        <SettingForm title={t("policy.uploadCdn")} lgWidth={5}>
+          <FormControl fullWidth>
+            <FormControlLabel
+              slotProps={{
+                typography: {
+                  variant: "body2",
+                },
+              }}
+              control={
+                <Checkbox
+                  size={"small"}
+                  checked={values.settings?.upload_custom_proxy ?? false}
+                  onChange={onUploadCdnChange}
+                />
+              }
+              label={t("policy.useUploadCdn")}
+            />
+            <Collapse in={values.settings?.upload_custom_proxy} unmountOnExit>
+              <Box>
+                <EndpointInput
+                  fullWidth
+                  required
+                  enforceProtocol
+                  variant={"outlined"}
+                  value={values.settings?.upload_proxy_server ?? ""}
+                  onChange={onUploadProxyServerChange}
+                />
+                <NoMarginHelperText>{t("policy.uploadCdnDes")}</NoMarginHelperText>
+              </Box>
+            </Collapse>
+          </FormControl>
+        </SettingForm>
+        {values.settings?.upload_custom_proxy && (
+          <SettingForm title={t("policy.uploadCdn") + t("policy.pathReplacement")} lgWidth={5}>
+            <FormControl fullWidth>
+              <PathReplacementEditor
+                value={values.settings?.upload_path_replacements}
+                onChange={onUploadPathReplacementChange}
+                helperText={t("policy.pathReplacementDes")}
+              />
+            </FormControl>
+          </SettingForm>
+        )}
         {values.type !== PolicyType.local && (
           <>
             <SettingForm lgWidth={5}>
@@ -417,10 +494,12 @@ const StorageAndUploadSection = () => {
             </SettingForm>
             <SettingForm title={t("policy.uploadTrafficDiagram")} lgWidth={5}>
               <TrafficDiagram
-                internalEndpoint={!!values.settings?.server_side_endpoint}
                 variant="upload"
-                storageNodeTitle={t("policy.node")}
+                internalEndpoint={!!values.settings?.server_side_endpoint}
+                cdn={values.settings?.upload_custom_proxy}
                 proxyed={values.settings?.relay}
+                proxyNodeTitle={values.type === PolicyType.qiniu ? t("policy.cdnOrCustomDomain") : undefined}
+                storageNodeTitle={t("policy.node")}
               />
             </SettingForm>
           </>

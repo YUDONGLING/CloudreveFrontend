@@ -212,7 +212,11 @@ export interface PolicySetting {
   od_redirect?: string;
   custom_proxy?: boolean;
   proxy_server?: string;
+  path_replacements?: Array<{ from: string; to: string }>;
   internal_proxy?: boolean;
+  upload_custom_proxy?: boolean;
+  upload_proxy_server?: string;
+  upload_path_replacements?: Array<{ from: string; to: string }>;
   od_driver?: string;
   region?: string;
   server_side_endpoint?: string;
