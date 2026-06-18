@@ -896,7 +896,7 @@
     "downloadCdn": "Pobieranie CDN",
     "useDownloadCdn": "Użyj CDN dla ruchu pobierania",
     "skipSign": "Pomiń podpis URL dla CDN",
-    "skipSignDes": "Jeśli włączono „Użyj uwierzytelniania źródłowego” dla tej domeny w ustawieniach bucketa, zaznacz tę opcję.",
+    "skipSignDes": "Jeśli włączono „uwierzytelnianie źródłowe” dla tej domeny w ustawieniach CDN, zaznacz tę opcję. Po włączeniu Cloudreve nie będzie podpisywać URL plików w pamięci.",
     "cdnHost": "Host CDN",
     "downloadCdnDes": "Host, protokół i port adresu URL, którego użytkownicy używają do dostępu do plików, zostaną zastąpione podanym hostem CDN.",
     "mediaExtractorProxy": "Proxy ekstrakcji mediów",

@@ -896,7 +896,7 @@
     "downloadCdn": "다운로드 CDN",
     "useDownloadCdn": "CDN을 사용하여 다운로드 가속",
     "skipSign": "CDN 파일 URL에 서명하지 않음",
-    "skipSignDes": "COS 도메인 설정에서 \"소스 인증\"을 활성화한 경우 이 항목을 선택하세요.",
+    "skipSignDes": "CDN 도메인 설정에서 \"소스 인증\"을 활성화한 경우 이 항목을 선택하세요. 활성화하면 Cloudreve가 스토리지 파일 URL에 서명하지 않습니다.",
     "cdnHost": "CDN 주소",
     "downloadCdnDes": "사용자가 파일에 액세스할 때 URL의 호스트명, 프로토콜 등 부분이 지정한 CDN 도메인으로 교체됩니다.",
     "mediaExtractorProxy": "미디어 정보 추출 프록시",

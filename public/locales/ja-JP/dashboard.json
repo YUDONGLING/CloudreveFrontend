@@ -896,7 +896,7 @@
     "downloadCdn": "ダウンロードCDN",
     "useDownloadCdn": "CDNを使用してダウンロードを高速化",
     "skipSign": "CDN署名ファイルURLを生成しない",
-    "skipSignDes": "COSドメイン設定で「オリジン認証」を有効にしている場合は、この項目を選択してください。",
+    "skipSignDes": "CDNドメイン設定で「オリジン認証」を有効にしている場合は、この項目を選択してください。有効にすると、CloudreveはストレージのファイルURLに署名しません。",
     "cdnHost": "CDNアドレス",
     "downloadCdnDes": "ユーザーがファイルにアクセスする際のURLのホスト名、プロトコルなどの部分は、指定したCDNドメインに置き換えられます。",
     "mediaExtractorProxy": "プロキシによるメディア情報取得",

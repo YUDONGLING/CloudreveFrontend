@@ -98,7 +98,7 @@ const DownloadSection = () => {
                   onChange={onProxyServerChange}
                 />
                 <NoMarginHelperText>{t("policy.downloadCdnDes")}</NoMarginHelperText>
-                {values.type == PolicyType.cos && values.is_private && (
+                {values.is_private && (
                   <FormControl fullWidth>
                     <FormControlLabel
                       slotProps={{

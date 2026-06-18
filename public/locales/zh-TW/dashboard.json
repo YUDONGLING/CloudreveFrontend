@@ -896,7 +896,7 @@
     "downloadCdn": "下載 CDN",
     "useDownloadCdn": "使用 CDN 加速下載",
     "skipSign": "不為 CDN 簽名文件 URL",
-    "skipSignDes": "如果你在 COS 域名設置中開啟了 “回源鑑權”，請勾選此項。",
+    "skipSignDes": "如果你在 CDN 域名設置中開啟了 “回源鑑權”，請勾選此項。開啟後，Cloudreve 不會對儲存端的文件 URL 進行簽名。",
     "cdnHost": "CDN 地址",
     "downloadCdnDes": "使用者訪問檔案時的 URL 中的主機名、協議等部分會被替換為你指定的 CDN 域名。",
     "mediaExtractorProxy": "代理提取媒體資訊",

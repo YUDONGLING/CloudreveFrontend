@@ -897,7 +897,7 @@
     "downloadCdn": "CDN de descarga",
     "useDownloadCdn": "Usar CDN para tráfico de descarga",
     "skipSign": "Omitir firma de URL para CDN",
-    "skipSignDes": "Si has habilitado \"Usar autenticación de origen\" para este dominio en la configuración del bucket, por favor marca esta opción.",
+    "skipSignDes": "Si has habilitado \"autenticación de origen\" para este dominio en la configuración de tu CDN, por favor marca esta opción. Después de habilitar, Cloudreve no firmará la URL del archivo de almacenamiento.",
     "cdnHost": "Host CDN",
     "downloadCdnDes": "El host, protocolo y puerto de la URL que los usuarios usan para acceder a archivos será reemplazado con el host CDN que especifiques.",
     "mediaExtractorProxy": "Proxy de extracción de medios",
